@@ -16,5 +16,5 @@ public partial class AppDbContext : DbContext
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public DbSet<User> Users { get; set; }
+    public DbSet<User>? Users { get; set; }
 }
