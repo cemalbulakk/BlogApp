@@ -6,11 +6,13 @@ using System.Security.Claims;
 using BlogApp.Common.Dtos;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BlogApp.API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class AuthController : CustomBaseController
     {
         private readonly IAuthService _authService;
@@ -23,26 +25,26 @@ namespace BlogApp.API.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Auth([FromBody] AuthDto authDto)
         {
-            var token = await _authService.Auth(authDto);
-            var getPrincipalFromExpiredToken = _tokenService.GetPrincipalFromExpiredToken(token.Data.Token);
-            await HttpContext.SignInAsync(getPrincipalFromExpiredToken);
-            return CreateActionResult(token);
+            return CreateActionResult(await _authService.Auth(authDto));
         }
 
         [HttpPost]
-        public async Task<IActionResult> RefreshToken()
+        [AllowAnonymous]
+        public async Task<IActionResult> RefreshToken(string refreshToken)
+        {
+
+            return CreateActionResult(await _authService.RefreshToken(refreshToken));
+        }
+
+        [HttpPost]
+        public IActionResult LogOut()
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return CreateActionResult(await _authService.RefreshToken(new RefreshTokenRequest { UserId = userId }));
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> LogOut()
-        {
-            await HttpContext.SignOutAsync();
-            return Ok();
+            if (userId != null) _authService.Revoke(userId);
+            return CreateActionResult(Response<NoContent>.Success(200));
         }
     }
 }

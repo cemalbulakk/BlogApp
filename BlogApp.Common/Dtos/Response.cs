@@ -4,14 +4,14 @@ namespace BlogApp.Common.Dtos;
 
 public class Response<T>
 {
-    public T Data { get; set; }
+    public T? Data { get; set; }
 
     [JsonIgnore]
     public int StatusCode { get; set; }
 
     public bool IsSuccessful { get; set; }
 
-    public List<string> Errors { get; set; }
+    public List<string>? Errors { get; set; }
 
 
 
@@ -25,9 +25,19 @@ public class Response<T>
         };
     }
 
-    public static Response<T> Success(int statusCode, string? message)
+    public static Response<T?> Success(int statusCode, string? message)
     {
-        return new Response<T>
+        return new Response<T?>
+        {
+            Data = default(T),
+            StatusCode = statusCode,
+            IsSuccessful = true,
+        };
+    }
+
+    public static Response<T?> Success(int statusCode)
+    {
+        return new Response<T?>
         {
             Data = default(T),
             StatusCode = statusCode,

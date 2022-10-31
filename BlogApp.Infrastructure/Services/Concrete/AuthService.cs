@@ -10,7 +10,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json.Linq;
 
 namespace BlogApp.Infrastructure.Services.Concrete;
 
@@ -37,7 +36,7 @@ public class AuthService : IAuthService
             var passwordHash = Helper.HashSha256(authDto.Password);
             if (!user.PasswordHash.Equals(passwordHash)) return Response<TokenInfo>.Fail("email or password wrong.", 400);
 
-            await Revoke(user.Id);
+            Revoke(user.Id);
 
             var authClaims = await AuthClaims(user);
             var token = _tokenService.CreateToken(authClaims);
@@ -68,35 +67,41 @@ public class AuthService : IAuthService
 
     }
 
-    public async Task<Response<TokenInfo>> RefreshToken(RefreshTokenRequest refreshTokenRequest)
+    public async Task<Response<TokenInfo>> RefreshToken(string refreshToken)
     {
         try
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id.Equals(refreshTokenRequest.UserId));
+            var userTokens = await _context.UserTokens.FirstOrDefaultAsync(x => x.RefreshToken.Equals(refreshToken));
 
-            if (user == null) return Response<TokenInfo>.Fail("not found.", 400);
-            await Revoke(user.Id);
-            var newToken = _tokenService.CreateToken(await AuthClaims(user));
-            var newRefreshToken = _tokenService.GenerateRefreshToken();
-
-            await _context.UserTokens.AddAsync(new UserToken()
+            if (userTokens == null) return Response<TokenInfo>.Fail("invalid token", 400);
             {
-                UserId = user.Id,
-                RefreshToken = newRefreshToken,
-                Token = new JwtSecurityTokenHandler().WriteToken(newToken),
-                ExpireDate = newToken.ValidTo
-            });
-            await _context.SaveChangesAsync();
+                var user = await _context.Users.FirstOrDefaultAsync(x => x.Id.Equals(userTokens.UserId));
 
-            var tokenDto = new TokenInfo
-            {
-                Token = new JwtSecurityTokenHandler().WriteToken(newToken),
-                RefreshToken = newRefreshToken,
-                ExpireDate = newToken.ValidTo
-            };
+                if (user == null) return Response<TokenInfo>.Fail("not found.", 400);
+                var getPrincipal = _tokenService.GetPrincipalFromExpiredToken(userTokens.Token);
+                var newToken = _tokenService.CreateToken(getPrincipal.Claims);
+                var newRefreshToken = _tokenService.GenerateRefreshToken();
 
-            return Response<TokenInfo>.Success(tokenDto, 200);
+                Revoke(user.Id);
 
+                await _context.UserTokens.AddAsync(new UserToken()
+                {
+                    UserId = user.Id,
+                    RefreshToken = newRefreshToken,
+                    Token = new JwtSecurityTokenHandler().WriteToken(newToken),
+                    ExpireDate = newToken.ValidTo
+                });
+                await _context.SaveChangesAsync();
+
+                var tokenDto = new TokenInfo
+                {
+                    Token = new JwtSecurityTokenHandler().WriteToken(newToken),
+                    RefreshToken = newRefreshToken,
+                    ExpireDate = newToken.ValidTo
+                };
+
+                return Response<TokenInfo>.Success(tokenDto, 200);
+            }
         }
         catch (Exception e)
         {
@@ -104,12 +109,11 @@ public class AuthService : IAuthService
         }
     }
 
-    public Task Revoke(string userId)
+    public void Revoke(string userId)
     {
         var userTokens = _context.UserTokens.Where(x => x.UserId.Equals(userId));
         _context.RemoveRange(userTokens);
         _context.SaveChangesAsync();
-        return Task.CompletedTask;
     }
 
     private async Task<List<Claim>> AuthClaims(User user)
@@ -134,7 +138,7 @@ public class AuthService : IAuthService
 
         var authClaims = new List<Claim>
             {
-                new(ClaimTypes.NameIdentifier, user?.Id ?? string.Empty),
+                new(ClaimTypes.NameIdentifier, user.Id ?? string.Empty),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
