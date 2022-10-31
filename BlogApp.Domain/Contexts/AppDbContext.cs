@@ -19,4 +19,9 @@ public partial class AppDbContext : DbContext
     public DbSet<Role> Roles { get; set; }
     public DbSet<RoleGroup> RoleGroups { get; set; }
     public DbSet<UserToken> UserTokens { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Post> Posts { get; set; }
+    public DbSet<PostCategory> PostCategories { get; set; }
+    public DbSet<PostPhoto> PostPhotos { get; set; }
+    public DbSet<PostTag> PostTags { get; set; }
 }
