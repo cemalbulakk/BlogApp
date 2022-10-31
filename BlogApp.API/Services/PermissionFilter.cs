@@ -17,26 +17,26 @@ public class PermissionFilter : IActionFilter
 
     public void OnActionExecuting(ActionExecutingContext context)
     {
-        int.TryParse(context.HttpContext.Request.Headers["UserId"].FirstOrDefault(), out var userId);
+        var userId = context.HttpContext.Request.Headers["UserId"].FirstOrDefault();
         //Role Yetkisine bakılır.
         if (HasRoleAttribute(context))
         {
             try
             {
-                var arguments = ((ControllerActionDescriptor)context.ActionDescriptor).MethodInfo.CustomAttributes.FirstOrDefault(fd => fd.AttributeType == typeof(RoleAttribute)).ConstructorArguments;
+                var arguments = ((ControllerActionDescriptor)context.ActionDescriptor).MethodInfo.CustomAttributes
+                    .FirstOrDefault(fd => fd.AttributeType == typeof(RoleAttribute))?.ConstructorArguments;
 
-                int roleGroupID = (int)arguments[0].Value;
-                Int64 roleID = (Int64)arguments[1].Value;
-                RoleModel role = _roleService.GetRoleById(userId, roleGroupID, roleID).Entity;
-                if (role == null || role.Id == 0)
+                string? roleGroupId = (string)(arguments?[0].Value)!;
+                Int64 bitwiseId = (Int64)(arguments?[1].Value ?? 0);
+                RoleModel role = _roleService.GetRoleById(userId, roleGroupId, bitwiseId).Data;
+                if (string.IsNullOrWhiteSpace(role.Id))
                 {
                     //Forbidden 403 Result. Yetkiniz Yoktur..
                     context.Result = new ObjectResult(context.ModelState)
                     {
                         Value = "You are not authorized for this page",
-                        StatusCode = Microsoft.AspNetCore.Http.StatusCodes.Status403Forbidden
+                        StatusCode = StatusCodes.Status403Forbidden
                     };
-                    return;
                 }
             }
             catch (Exception ex)
@@ -48,7 +48,6 @@ public class PermissionFilter : IActionFilter
 
     public void OnActionExecuted(ActionExecutedContext context)
     {
-        return;
     }
 
     public bool HasRoleAttribute(FilterContext context)

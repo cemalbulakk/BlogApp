@@ -11,6 +11,6 @@ public interface IRoleService : IAsyncRepository<Role>, IRepository<Role>
     Task<Response<CreateUserRoleDto>> CreateUserRole(CreateUserRoleDto createUserRoleDto);
     Task<Response<CreateRoleGroupDto>> CreateRoleGroup(CreateRoleGroupDto createRoleGroupDto);
 
-    public Task<Response<RoleModel>> GetRoleById(string userId, string roleGroupId, long bitwiseId);
-    public Task<Response<List<RoleModel>>> GetRoleListByGroupId(string userId, string roleGroupId);
+    public Response<RoleModel> GetRoleById(string? userId, string? roleGroupId, long bitwiseId);
+    public Response<List<RoleModel>> GetRoleListByGroupId(string userId, string roleGroupId);
 }

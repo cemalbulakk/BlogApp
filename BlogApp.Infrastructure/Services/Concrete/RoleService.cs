@@ -118,17 +118,17 @@ public class RoleService : EfRepositoryBase<Role, AppDbContext>, IRoleService
         }
     }
 
-    public async Task<Response<RoleModel>> GetRoleById(string userId, string roleGroupId, long bitwiseId)
+    public Response<RoleModel> GetRoleById(string? userId, string? roleGroupId, long bitwiseId)
     {
         var model = new RoleModel();
-        var userRole = await Context.UserRoles.Include(x => x.RoleGroup)
-            .FirstOrDefaultAsync(x => x.RoleGroupId != null && x.UserId != null && x.UserId.Equals(userId) && x.RoleGroupId.Equals(roleGroupId));
+        var userRole = Context.UserRoles.Include(x => x.RoleGroup)
+            .FirstOrDefault(x => x.RoleGroupId != null && x.UserId != null && x.UserId.Equals(userId) && x.RoleGroupId.Equals(roleGroupId));
 
         if (userRole is null) return Response<RoleModel>.Fail("not found.", 400);
 
         if (bitwiseId != (userRole.Roles & bitwiseId)) return Response<RoleModel>.Fail("not found.", 400);
         {
-            var role = await Context.Roles.FirstOrDefaultAsync(x => x.RoleGroupId != null && x.BitwiseId.Equals(bitwiseId) && x.RoleGroupId.Equals(roleGroupId));
+            var role = Context.Roles.FirstOrDefault(x => x.RoleGroupId != null && x.BitwiseId.Equals(bitwiseId) && x.RoleGroupId.Equals(roleGroupId));
             if (role == null) return Response<RoleModel>.Fail("not found.", 400);
             model = new RoleModel()
             {
@@ -144,17 +144,17 @@ public class RoleService : EfRepositoryBase<Role, AppDbContext>, IRoleService
 
     }
 
-    public async Task<Response<List<RoleModel>>> GetRoleListByGroupId(string userId, string roleGroupId)
+    public Response<List<RoleModel>> GetRoleListByGroupId(string userId, string roleGroupId)
     {
         var model = new List<RoleModel>();
         var userRole =
-            await Context.UserRoles.FirstOrDefaultAsync(x =>
+             Context.UserRoles.FirstOrDefault(x =>
                 x.UserId != null && x.RoleGroupId != null && x.RoleGroupId.Equals(roleGroupId) && x.UserId.Equals(userId));
 
         if (userRole is not null)
         {
-            var allRoles = await Context.Roles.Include(x => x.RoleGroup)
-                .Where(x => x.RoleGroupId != null && x.RoleGroupId.Equals(roleGroupId)).ToListAsync();
+            var allRoles =  Context.Roles.Include(x => x.RoleGroup)
+                .Where(x => x.RoleGroupId != null && x.RoleGroupId.Equals(roleGroupId)).ToList();
 
             allRoles.ForEach(x =>
             {

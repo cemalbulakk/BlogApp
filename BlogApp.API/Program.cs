@@ -1,3 +1,4 @@
+using BlogApp.API.Services;
 using BlogApp.Application;
 using BlogApp.Domain;
 using BlogApp.Domain.Contexts;
@@ -16,6 +17,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<PermissionFilter>();
 
 builder.Services.AddInfrastructureServices();
 builder.Services.AddDomainServices();

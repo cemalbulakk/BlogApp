@@ -22,7 +22,7 @@ public class UserController : CustomBaseController
     }
 
     [HttpGet]
-    [Role((int)Enums.RoleGroup.User, (long)Enums.UserRoles.GetUsers)]
+    [Role(Enums.User, (long)Enums.UserRoles.GetUsers)]
     public async Task<IActionResult> GetUsers([FromQuery] PageRequest pageRequest)
     {
         var users = await _userService.GetUsers(pageRequest);
@@ -30,28 +30,28 @@ public class UserController : CustomBaseController
     }
 
     [HttpPost]
-    [Role((int)Enums.RoleGroup.User, (long)Enums.UserRoles.CreateUser)]
+    [Role(Enums.User, (long)Enums.UserRoles.CreateUser)]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserDto createUserDto)
     {
         return CreateActionResult(await _userService.CreateUser(createUserDto));
     }
 
     [HttpPost]
-    [Role((int)Enums.RoleGroup.Role, (long)Enums.RoleRoles.CreateRole)]
+    [Role(Enums.Role, (long)Enums.RoleRoles.CreateRole)]
     public async Task<IActionResult> CreateRole([FromBody] CreateRoleDto createRoleDto)
     {
         return CreateActionResult(await _roleService.CreateRole(createRoleDto));
     }
 
     [HttpPost]
-    [Role((int)Enums.RoleGroup.Role, (long)Enums.RoleRoles.CreateRoleGroup)]
+    [Role(Enums.Role, (long)Enums.RoleRoles.CreateRoleGroup)]
     public async Task<IActionResult> CreateRoleGroup([FromBody] CreateRoleGroupDto createRoleGroupDto)
     {
         return CreateActionResult(await _roleService.CreateRoleGroup(createRoleGroupDto));
     }
 
     [HttpPost]
-    [Role((int)Enums.RoleGroup.Role, (long)Enums.RoleRoles.CreateUserRole)]
+    [Role(Enums.Role, (long)Enums.RoleRoles.CreateUserRole)]
     public async Task<IActionResult> CreateUserRole([FromBody] CreateUserRoleDto createUserRoleDto)
     {
         return CreateActionResult(await _roleService.CreateUserRole(createUserRoleDto));
