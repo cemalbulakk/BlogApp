@@ -1,10 +1,10 @@
 ﻿using BlogApp.Persistence.Paging;
 using System.Linq.Expressions;
+using BlogApp.Common.Dtos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace BlogApp.Persistence.Repositories;
-
 public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IRepository<TEntity>
     where TEntity : class
     where TContext : DbContext

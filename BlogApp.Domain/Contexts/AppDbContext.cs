@@ -1,7 +1,5 @@
-﻿using System.Data;
-using BlogApp.Domain.Entities;
+﻿using BlogApp.Domain.Entities;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogApp.Domain.Contexts;

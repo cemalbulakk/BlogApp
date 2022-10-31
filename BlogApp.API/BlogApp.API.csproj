@@ -18,9 +18,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlogApp.Application\BlogApp.Application.csproj" />
+    <ProjectReference Include="..\BlogApp.Common\BlogApp.Common.csproj" />
     <ProjectReference Include="..\BlogApp.Domain\BlogApp.Domain.csproj" />
     <ProjectReference Include="..\BlogApp.Infrastructure\BlogApp.Infrastructure.csproj" />
     <ProjectReference Include="..\BlogApp.Persistence\BlogApp.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
