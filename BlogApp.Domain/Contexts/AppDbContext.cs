@@ -18,4 +18,5 @@ public partial class AppDbContext : DbContext
     public DbSet<UserRole> UserRoles { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<RoleGroup> RoleGroups { get; set; }
+    public DbSet<UserToken> UserTokens { get; set; }
 }

@@ -10,6 +10,8 @@ public static class InfrastructureServiceRegistration
     {
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IRoleService, RoleService>();
+        services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<ITokenService, TokenService>();
 
         return services;
     }
