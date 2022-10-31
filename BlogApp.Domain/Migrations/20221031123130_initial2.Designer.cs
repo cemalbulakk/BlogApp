@@ -4,6 +4,7 @@ using BlogApp.Domain.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogApp.Domain.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221031123130_initial2")]
+    partial class initial2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +42,11 @@ namespace BlogApp.Domain.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<string>("RoleGroupId")
+                    b.Property<int?>("RoleGroupId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RoleGroupId1")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("RoleName")
@@ -55,7 +61,7 @@ namespace BlogApp.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleGroupId");
+                    b.HasIndex("RoleGroupId1");
 
                     b.ToTable("Roles");
                 });
@@ -191,7 +197,9 @@ namespace BlogApp.Domain.Migrations
                 {
                     b.HasOne("BlogApp.Domain.Entities.RoleGroup", "RoleGroup")
                         .WithMany("Roles")
-                        .HasForeignKey("RoleGroupId");
+                        .HasForeignKey("RoleGroupId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("RoleGroup");
                 });

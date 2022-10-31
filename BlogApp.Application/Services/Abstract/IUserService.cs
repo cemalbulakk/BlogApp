@@ -9,4 +9,5 @@ namespace BlogApp.Application.Services.Abstract;
 public interface IUserService : IAsyncRepository<User>, IRepository<User>
 {
     Task<Response<IPaginate<UserDto>>> GetUsers(PageRequest request);
+    Task<Response<UserDto>> CreateUser(CreateUserDto createUserDto);
 }

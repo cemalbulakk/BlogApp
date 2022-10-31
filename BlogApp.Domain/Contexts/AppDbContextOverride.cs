@@ -23,7 +23,7 @@ public partial class AppDbContext
                             case EntityState.Added:
                                 tractable.Id = Guid.NewGuid().ToString("D");
                                 tractable.CreateDate = now;
-                                tractable.CreateBy = authenticatedUserId ?? throw new InvalidOperationException(); //1
+                                tractable.CreateBy = authenticatedUserId ?? Guid.NewGuid().ToString(); //1
                                 tractable.IsActive = true;
                                 break;
 

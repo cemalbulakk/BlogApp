@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="Features\Dtos\" />
+    <Folder Include="Features\Enums\" />
     <Folder Include="Mapping\" />
     <Folder Include="Services\Abstract\" />
   </ItemGroup>

@@ -9,5 +9,9 @@ public class CustomMapping : Profile
     public CustomMapping()
     {
         CreateMap<User, UserDto>().ReverseMap();
+        CreateMap<CreateUserDto, User>().ReverseMap();
+
+        CreateMap<CreateRoleDto, Role>().ReverseMap();
+        CreateMap<CreateRoleGroupDto, RoleGroup>().ReverseMap();
     }
 }
