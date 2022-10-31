@@ -109,11 +109,19 @@ public class AuthService : IAuthService
         }
     }
 
-    public void Revoke(string userId)
+    public Response<NoContent> Revoke(string userId)
     {
-        var userTokens = _context.UserTokens.Where(x => x.UserId.Equals(userId));
-        _context.RemoveRange(userTokens);
-        _context.SaveChangesAsync();
+        try
+        {
+            var userTokens = _context.UserTokens.Where(x => x.UserId.Equals(userId));
+            _context.RemoveRange(userTokens);
+            _context.SaveChangesAsync();
+            return Response<NoContent>.Success(200)!;
+        }
+        catch (Exception e)
+        {
+            return Response<NoContent>.Fail(e.Message, 400);
+        }
     }
 
     private async Task<List<Claim>> AuthClaims(User user)

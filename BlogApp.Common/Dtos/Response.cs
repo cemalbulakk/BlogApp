@@ -64,4 +64,13 @@ public class Response<T>
             IsSuccessful = false
         };
     }
+
+    public static Response<T> Fail(int statusCode)
+    {
+        return new Response<T>
+        {
+            StatusCode = statusCode,
+            IsSuccessful = false
+        };
+    }
 }
