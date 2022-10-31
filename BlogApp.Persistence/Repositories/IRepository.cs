@@ -1,5 +1,5 @@
-﻿using BlogApp.Persistence.Paging;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
+using BlogApp.Persistence.Paging;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace BlogApp.Persistence.Repositories;

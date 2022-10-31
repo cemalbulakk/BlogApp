@@ -1,4 +1,6 @@
-﻿namespace BlogApp.Persistence;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace BlogApp.Persistence;
 
 public static class PersistenceServiceRegistration
 {
