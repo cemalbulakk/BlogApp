@@ -42,6 +42,7 @@ public class PostService : EfRepositoryBase<Post, AppDbContext>, IPostService
             var posts = await base.GetAllAsync(include: x => x.Include(x1 => x1.Category)
                     .Include(x2 => x2.PostPhotos)
                     .Include(x3 => x3.PostTags))
+                .OrderBy(x => x.CreateDate)
                 .Select(x => _mapper.Map<PostDto>(x))
                 .ToPaginateAsync(request.Index,
                     request.Size);

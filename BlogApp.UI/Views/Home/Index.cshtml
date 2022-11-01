@@ -1,0 +1,53 @@
+﻿@model MvcResponse<BlogApp.Application.Features.Dtos.PostDto>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="container border-2">
+
+    @if (Model.data != null)
+    {
+        foreach (var item in Model.data.items)
+        {
+            <div class="row">
+                <div class="card col-md-6 mt-2">
+                    <div class="card-header">
+                        @item.Title
+                    </div>
+                    <div class="card-body">
+                        @item.Description
+                    </div>
+                    <div class="card-footer">
+                        @item.CreateDate.ToString("F")
+                    </div>
+                </div>
+            </div>
+        }
+
+        {
+            var prevDisabled = !Model.data.hasPrevious ? "disabled" : "";
+            var nextDisabled = !Model.data.hasNext ? "disabled" : "";
+            <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.data.index - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @prevDisabled">
+                Previous
+            </a>
+            <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.data.index + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @nextDisabled">
+                Next
+            </a>
+        }
+    }
+
+</div>

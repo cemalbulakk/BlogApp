@@ -115,7 +115,7 @@ public class AuthService : IAuthService
         {
             var userTokens = _context.UserTokens.Where(x => x.UserId.Equals(userId));
             _context.RemoveRange(userTokens);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
             return Response<NoContent>.Success(200)!;
         }
         catch (Exception e)
@@ -147,7 +147,10 @@ public class AuthService : IAuthService
         var authClaims = new List<Claim>
             {
                 new(ClaimTypes.NameIdentifier, user.Id ?? string.Empty),
-                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new(ClaimTypes.Email, user.Email),
+                new(ClaimTypes.Name, user.Name),
+                new(ClaimTypes.Surname, user.Surname),
             };
 
         userRoles.ForEach(userRole =>

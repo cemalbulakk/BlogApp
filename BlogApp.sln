@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogApp.API", "BlogApp.API\BlogApp.API.csproj", "{61AC0E95-6C83-4BFD-91E4-AF213A785151}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApp.API", "BlogApp.API\BlogApp.API.csproj", "{61AC0E95-6C83-4BFD-91E4-AF213A785151}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogApp.Application", "BlogApp.Application\BlogApp.Application.csproj", "{DDE4CC0F-A954-40C4-B555-715F09F7D778}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApp.Application", "BlogApp.Application\BlogApp.Application.csproj", "{DDE4CC0F-A954-40C4-B555-715F09F7D778}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogApp.Domain", "BlogApp.Domain\BlogApp.Domain.csproj", "{8BFEF621-C5AD-44CC-AEF1-39AB6EFED17D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApp.Domain", "BlogApp.Domain\BlogApp.Domain.csproj", "{8BFEF621-C5AD-44CC-AEF1-39AB6EFED17D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogApp.Infrastructure", "BlogApp.Infrastructure\BlogApp.Infrastructure.csproj", "{D5BE4C11-15EA-4207-8BA2-FD44BD779271}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApp.Infrastructure", "BlogApp.Infrastructure\BlogApp.Infrastructure.csproj", "{D5BE4C11-15EA-4207-8BA2-FD44BD779271}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogApp.Persistence", "BlogApp.Persistence\BlogApp.Persistence.csproj", "{07A498F8-A6DB-4673-9FCD-D09777480C26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApp.Persistence", "BlogApp.Persistence\BlogApp.Persistence.csproj", "{07A498F8-A6DB-4673-9FCD-D09777480C26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogApp.Common", "BlogApp.Common\BlogApp.Common.csproj", "{E527B5C0-8555-4C5B-BE25-2C56E9FB82AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApp.Common", "BlogApp.Common\BlogApp.Common.csproj", "{E527B5C0-8555-4C5B-BE25-2C56E9FB82AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogApp.UI", "BlogApp.UI\BlogApp.UI.csproj", "{7F3E4998-1B8F-4BE5-B20F-20977C5164C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{E527B5C0-8555-4C5B-BE25-2C56E9FB82AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E527B5C0-8555-4C5B-BE25-2C56E9FB82AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E527B5C0-8555-4C5B-BE25-2C56E9FB82AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F3E4998-1B8F-4BE5-B20F-20977C5164C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F3E4998-1B8F-4BE5-B20F-20977C5164C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F3E4998-1B8F-4BE5-B20F-20977C5164C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F3E4998-1B8F-4BE5-B20F-20977C5164C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
