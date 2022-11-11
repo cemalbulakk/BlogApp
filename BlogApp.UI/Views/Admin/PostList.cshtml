@@ -1,0 +1,10 @@
+﻿@using BlogApp.Application.Features.Dtos
+@model MvcResponse<PostDto>
+
+@if (Model.data != null && Model.data.items != null)
+{
+    @foreach (var item in Model.data.items)
+    {
+        <div>@item.Title - @item.Description</div>
+    }
+}

@@ -1,6 +1,4 @@
-﻿using BlogApp.Application.Services.Abstract;
-
-namespace BlogApp.Application.Features.Dtos;
+﻿namespace BlogApp.Application.Features.Dtos;
 
 public class PostDto
 {

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BlogApp.Application.Features.Dtos;
-using BlogApp.Application.Services.Abstract;
 using BlogApp.Domain.Entities;
 
 namespace BlogApp.Application.Mapping;

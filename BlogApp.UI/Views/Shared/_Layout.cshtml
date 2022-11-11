@@ -3,68 +3,136 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BlogApp.UI</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/BlogApp.UI.styles.css" asp-append-version="true" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BlogApp.UI</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>Umut Benim!</title>
+    <link rel="icon" href="~/assets/img/logo.png" />
+    <link rel="stylesheet" href="~/assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Bitter:400,700" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Caveat&amp;display=swap" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Caveat+Brush&amp;display=swap" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora&amp;display=swap" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora" />
+    <link rel="stylesheet" href="~/assets/fonts/ionicons.min.css" />
+    <link rel="stylesheet" href="~/assets/css/-Login-form-Page-BS4-.css" />
+    <link rel="stylesheet" href="~/assets/css/Article-Clean.css" />
+    <link rel="stylesheet" href="~/assets/css/Article-Dual-Column.css" />
+    <link rel="stylesheet" href="~/assets/css/Article-List.css" />
+    <link rel="stylesheet"
+          href="~/assets/css/BS5-Jumbotron-with-background-Image.css" />
+    <link rel="stylesheet" href="~/assets/css/Contact-Form-Clean.css" />
+    <link rel="stylesheet" href="~/assets/css/Features-Blue.css" />
+    <link rel="stylesheet" href="~/assets/css/Footer-Basic.css" />
+    <link rel="stylesheet" href="~/assets/css/Header-Dark.css" />
+    <link rel="stylesheet" href="~/assets/css/Highlight-Blue.css" />
+    <link rel="stylesheet" href="~/assets/css/Highlight-Clean.css" />
+    <link rel="stylesheet" href="~/assets/css/Highlight-Phone.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="~/assets/css/Lightbox-Gallery.css" />
+    <link rel="stylesheet" href="~/assets/css/Navigation-Clean.css" />
+    <link rel="stylesheet" href="~/assets/css/Projects-Clean.css" />
+    <link rel="stylesheet" href="~/assets/css/Registration-Form-with-Photo.css" />
+    <link rel="stylesheet" href="~/assets/css/Simple-Slider.css" />
+    <link rel="stylesheet" href="~/assets/css/Team-Grid.css" />
+    <link rel="stylesheet" href="~/assets/css/untitled.css" />
+    <!-- Google tag (gtag.js) -->
+    <script async
+            src="https://www.googletagmanager.com/gtag/js?id=G-6PM93CXFPV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
 
-                        @if (Context.User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@Context.User.FindFirst(ClaimTypes.Email).Value</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Çıkış Yap</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Giriş Yap</a>
-                            </li>
-                        }
-                    </ul>
-                </div>
+        gtag("config", "G-6PM93CXFPV");
+    </script>
+</head>
+<body id="page-top">
+    <nav class="navbar navbar-light navbar-expand-lg navigation-clean">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><img src="~/assets/img/logo.png" /></a><button data-bs-toggle="collapse"
+                                                                                                   class="navbar-toggler"
+                                                                                                   data-bs-target="#navcol-8">
+                <span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-8">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link"
+                           aria-expanded="false"
+                           data-bs-toggle="dropdown"
+                           href="#"
+                           style="color: rgb(74, 194, 210)">UMUT BENİM</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="manifesto.html">Manifesto</a><a class="dropdown-item" href="bizkimiz.html">Biz Kimiz?</a><a class="dropdown-item" href="iletisim.html">İletişim</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link"
+                           aria-expanded="false"
+                           data-bs-toggle="dropdown"
+                           href="#"
+                           style="color: rgb(241, 230, 21)">YAŞAM</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="insan.html">İnsan</a><a class="dropdown-item" href="hayvan.html">Hayvan</a><a class="dropdown-item" href="bitki.html">Bitki</a><a class="dropdown-item" href="su.html">Su</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link"
+                           aria-expanded="false"
+                           data-bs-toggle="dropdown"
+                           href="#"
+                           style="color: rgb(230, 120, 121)">EŞYALARINA İYİ BAK</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="surdur.html">Sürdürülebilirlik</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link"
+                           aria-expanded="false"
+                           data-bs-toggle="dropdown"
+                           href="#"
+                           style="color: rgb(192, 146, 192)">ETKİNLİKLER</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="duyurular.html">Duyurular</a><a class="dropdown-item" href="1-ekim.html">Birimiz Hepimiz İçin</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - BlogApp.UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="footer-basic"
+            style="box-shadow: inset 0px 2px rgb(247, 231, 149)">
+        <div class="social">
+            <a href="https://www.instagram.com/_umut_benim/"><i class="icon ion-social-instagram"></i></a><a href="https://www.youtube.com/channel/UC21kI7Dvq6xp4HKQlb0yAZA"><i class="icon ion-social-youtube"></i></a><a href="https://twitter.com/UmutBenim_"><i class="icon ion-social-twitter"></i></a><a href="https://www.facebook.com/umutbenimm/">
+                <i class="icon ion-social-facebook"></i>
+            </a>
         </div>
+        <p class="copyright">umutbenim © 2022</p>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+    <script src="~/assets/js/stylish-portfolio.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.js"></script>
+    <script src="~/assets/js/Lightbox-Gallery.js"></script>
+    <script src="~/assets/js/Simple-Slider.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

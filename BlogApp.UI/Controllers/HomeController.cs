@@ -10,19 +10,19 @@ using Microsoft.AspNetCore.Authentication;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using BlogApp.Application.Services.Abstract;
 
 namespace BlogApp.UI.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
-            _logger = logger;
         }
 
+
+        [AllowAnonymous]
         public async Task<IActionResult> Index(int? pageNumber)
         {
             pageNumber = pageNumber ?? 0;
@@ -86,7 +86,5 @@ namespace BlogApp.UI.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index");
         }
-
-
     }
 }

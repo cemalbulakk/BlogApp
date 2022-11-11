@@ -29,7 +29,7 @@ public class PermissionFilter : IActionFilter
                 string? roleGroupId = (string)(arguments?[0].Value)!;
                 Int64 bitwiseId = (Int64)(arguments?[1].Value ?? 0);
                 RoleModel role = _roleService.GetRoleById(userId, roleGroupId, bitwiseId).Data;
-                if (string.IsNullOrWhiteSpace(role.Id))
+                if (role != null && string.IsNullOrWhiteSpace(role.Id))
                 {
                     //Forbidden 403 Result. Yetkiniz Yoktur..
                     context.Result = new ObjectResult(context.ModelState)
